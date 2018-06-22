@@ -1,0 +1,23 @@
+{
+  "name": "0lsen/nn",
+  "description": "neural network playground",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "oLsen",
+      "email": "me@o1sen.noip.me"
+    }
+  ],
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "NN\\": "src/NN"
+    }
+  }
+}
