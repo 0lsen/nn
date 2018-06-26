@@ -217,7 +217,7 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 		];
 
 		$trainingQualiData = file_get_contents('qualification.txt');
-		preg_match_all('/([A-Za-zäÄüÜöÖß\- ]+)\n\1{1}\n([A-Za-zäÄüÜöÖß\- ]+)\n\2{1}\n.*\n(\d)-(\d)/',$trainingQualiData, $matches);
+		preg_match_all('/([A-Za-zäÄüÜöÖß\- ]+)\r\n\1{1}\r\n([A-Za-zäÄüÜöÖß\- ]+)\r\n\2{1}\r\n.*\r\n(\d)-(\d)/',$trainingQualiData, $matches);
 		$resultsQuali = [];
 		foreach ($matches[0] as $index => $match) {
 			if (array_search($matches[1][$index], $participantsWc) || array_search($matches[2][$index], $participantsWc)) {
@@ -272,15 +272,14 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 			\NN\Model\Logger::$run = 0;
 		}
 
-		$result1 = $oracle->run($this->makeTestMatch("Brasilien", "Costa Rica", $participants));
-		$result2 = $oracle->run($this->makeTestMatch("Island", "Nigeria", $participants));
-		$result3 = $oracle->run($this->makeTestMatch("Schweiz", "Serbien", $participants));
-		$result4 = $oracle->run($this->makeTestMatch("Belgien", "Tunesien", $participants));
-		$result5 = $oracle->run($this->makeTestMatch("Korea Republik", "Mexiko", $participants));
-		$result6 = $oracle->run($this->makeTestMatch("Deutschland", "Schweden", $participants));
-		$result7 = $oracle->run($this->makeTestMatch("England", "Panama", $participants));
-		$result8 = $oracle->run($this->makeTestMatch("Japan", "Senegal", $participants));
-		$result9 = $oracle->run($this->makeTestMatch("Kolumbien", "Polen", $participants));
+		$result1 = $oracle->run($this->makeTestMatch("Deutschland", "Korea Republik", $participants));
+		$result2 = $oracle->run($this->makeTestMatch("Mexiko", "Schweden", $participants));
+		$result3 = $oracle->run($this->makeTestMatch("Brasilien", "Serbien", $participants));
+		$result4 = $oracle->run($this->makeTestMatch("Costa Rica", "Schweiz", $participants));
+		$result5 = $oracle->run($this->makeTestMatch("Japan", "Polen", $participants));
+		$result6 = $oracle->run($this->makeTestMatch("Kolumbien", "Senegal", $participants));
+		$result7 = $oracle->run($this->makeTestMatch("Belgien", "England", $participants));
+		$result8 = $oracle->run($this->makeTestMatch("Panama", "Tunesien", $participants));
 		$this->assertTrue(true);
 	}
 
