@@ -3,15 +3,11 @@
 namespace NN\Model;
 
 
-use NN\Functions\TransferFunction;
-
 class Neuron {
-	/** @var TransferFunction */
-	protected $transferFunction;
+
+	protected $layer;
 
 	protected $weights;
-
-	protected $input;
 
 	protected $output;
 
@@ -21,36 +17,38 @@ class Neuron {
 
 	protected $weightsOld;
 
-	public function __construct(&$transferFunction = null, $weigths = [])
+	public function __construct(Layer &$layer = null, $weigths = [])
 	{
-		$this->transferFunction = 'NN\Functions\\' . $transferFunction;
+		$this->layer = $layer;
 		$this->weights = $weigths;
 	}
 
-	public function output($input)
+	public function output()
 	{
-		$this->input = $input;
 		$this->output = 0;
-		foreach ($input as $index => $value) {
+		foreach ($this->layer->input as $index => $value) {
 			$this->output += $value * $this->weights[$index];
 		}
-		$this->transfer = $this->transferFunction::apply($this->output);
+		$this->transfer = $this->layer->transferFunction::apply($this->output);
 		return $this->transfer;
 	}
 
-	public function backpropagate($weightChanges, $rate) {
+	public function backpropagate($weightChanges, $rate)
+	{
 		$this->weightsOld = $this->weights;
-		$this->delta = $this->transferFunction::derivative($this->output) * $weightChanges;
-		foreach ($this->input as $index => $input) {
+		$this->delta = $this->layer->transferFunction::derivative($this->output) * $weightChanges;
+		foreach ($this->layer->input as $index => $input) {
 			$this->weights[$index] += $rate * $input * $this->delta;
 		}
 	}
 
-	public function getWeightChange($index) {
+	public function getWeightChange($index)
+	{
 		return $this->delta * $this->weightsOld[$index];
 	}
 
-	public function extractWeights($indices = null) {
+	public function extractWeights($indices = null)
+	{
 		if (is_null($indices)) {
 			return $this->weights;
 		} else {
