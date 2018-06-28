@@ -48,7 +48,8 @@ class SimpleNetwork {
 		return $data;
 	}
 
-	public function extractWeights($indices) {
+	public function extractWeights($indices)
+	{
 		$weights = [];
 		$weights[] = $this->layers[1]->extractWeights($indices);
 		for ($i = 2; $i < sizeof($this->layers); $i++) {

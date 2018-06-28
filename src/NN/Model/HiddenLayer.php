@@ -13,7 +13,8 @@ class HiddenLayer extends Layer
 		parent::__construct($configuration);
 	}
 
-	public function backpropagate($weightChanges, $rate) {
+	public function backpropagate($weightChanges, $rate)
+	{
 		foreach ($this->neurons as $index => $neuron) {
 			if ($index) {
 				$neuron->backpropagate($weightChanges[$index], $rate);

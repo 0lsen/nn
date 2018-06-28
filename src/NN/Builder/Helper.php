@@ -9,7 +9,8 @@ class Helper
 	 * normal distribution approximate
 	 * @return float
 	 */
-	public static function nd() {
+	public static function nd()
+	{
 		$sum = 0;
 		for ($i = 0; $i < 6; $i++) {$sum += rand(0,100)/100;}
 		return $sum/6;
@@ -19,11 +20,13 @@ class Helper
 	 * noise based on a simple normal distribution approximate
 	 * @return float
 	 */
-	public static function noise() {
+	public static function noise()
+	{
 		return self::nd()-0.5;
 	}
 
-	public static function buildSimpleNetwork($inDim, $outDim, $outTransfer, $hiddenLayers = [], $outWeights = null) {
+	public static function buildSimpleNetwork($inDim, $outDim, $outTransfer, $hiddenLayers = [], $outWeights = null)
+	{
 		$inputConfig = new LayerConfiguration($inDim, null, null);
 		$hiddenConfig = [];
 		foreach ($hiddenLayers as $index => $layer) {
@@ -36,7 +39,8 @@ class Helper
 		return new SimpleNetwork($inputConfig, $outputConfig, $hiddenConfig);
 	}
 
-	private static function createWeights($numberOfInputs) {
+	private static function createWeights($numberOfInputs)
+	{
 		$weights = [];
 		for ($i = 0; $i < $numberOfInputs; $i++) {
 			$weights[] = self::noise();

@@ -8,11 +8,13 @@ class Logger {
 	static public $run = 0;
 	static public $error = [];
 
-	static public function log($value) {
+	static public function log($value)
+	{
 		self::$error[self::$iteration][self::$run][] = $value;
 	}
 
-	static public function average($iteration) {
+	static public function average($iteration)
+	{
 		$sum = 0;
 		foreach (self::$error[$iteration] as $run) {
 			foreach ($run as $error) {
