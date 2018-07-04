@@ -150,5 +150,37 @@
   {
     "Island": 1,
     "Kroatien": 2
+  },
+  {
+    "Deutschland": 0,
+    "Korea Republik": 2
+  },
+  {
+    "Mexiko": 0,
+    "Schweden": 3
+  },
+  {
+    "Brasilien": 2,
+    "Serbien": 0
+  },
+  {
+    "Costa Rica": 2,
+    "Schweiz": 2
+  },
+  {
+    "Japan": 0,
+    "Polen": 1
+  },
+  {
+    "Kolumbien": 1,
+    "Senegal": 0
+  },
+  {
+    "Belgien": 1,
+    "England": 0
+  },
+  {
+    "Panama": 1,
+    "Tunesien": 2
   }
 ]
