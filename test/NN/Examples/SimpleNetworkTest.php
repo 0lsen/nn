@@ -272,14 +272,10 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 			\NN\Model\Logger::$run = 0;
 		}
 
-		$result1 = $oracle->run($this->makeTestMatch("Deutschland", "Korea Republik", $participants));
-		$result2 = $oracle->run($this->makeTestMatch("Mexiko", "Schweden", $participants));
-		$result3 = $oracle->run($this->makeTestMatch("Brasilien", "Serbien", $participants));
-		$result4 = $oracle->run($this->makeTestMatch("Costa Rica", "Schweiz", $participants));
-		$result5 = $oracle->run($this->makeTestMatch("Japan", "Polen", $participants));
-		$result6 = $oracle->run($this->makeTestMatch("Kolumbien", "Senegal", $participants));
-		$result7 = $oracle->run($this->makeTestMatch("Belgien", "England", $participants));
-		$result8 = $oracle->run($this->makeTestMatch("Panama", "Tunesien", $participants));
+		$result1 = $oracle->run($this->makeTestMatch("Frankreich", "Uruguay", $participants));
+		$result2 = $oracle->run($this->makeTestMatch("Belgien", "Brasilien", $participants));
+		$result3 = $oracle->run($this->makeTestMatch("England", "Schweden", $participants));
+		$result4 = $oracle->run($this->makeTestMatch("Kroatien", "Russland", $participants));
 		$this->assertTrue(true);
 	}
 

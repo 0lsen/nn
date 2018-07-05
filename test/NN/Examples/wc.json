@@ -182,5 +182,37 @@
   {
     "Panama": 1,
     "Tunesien": 2
+  },
+  {
+    "Argentinien": 3,
+    "Frankreich": 4
+  },
+  {
+    "Portugal": 1,
+    "Uruguay": 2
+  },
+  {
+    "Russland": 1,
+    "Spanien": 1
+  },
+  {
+    "Dänemark": 1,
+    "Kroatien": 1
+  },
+  {
+    "Brasilien": 2,
+    "Mexiko": 0
+  },
+  {
+    "Belgien": 3,
+    "Japan": 2
+  },
+  {
+    "Schweden": 1,
+    "Schweiz": 0
+  },
+  {
+    "England": 1,
+    "Kolumbien": 2
   }
 ]
