@@ -3,7 +3,7 @@
 namespace NN\Functions;
 
 
-class Step implements TransferFunction
+class Step extends AbstractTransferFunction
 {
 	public static function apply($output)
 	{
@@ -12,6 +12,6 @@ class Step implements TransferFunction
 
 	public static function derivative($output)
 	{
-		return 0;
+		return parent::derivative(0);
 	}
 }

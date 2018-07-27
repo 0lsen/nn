@@ -3,9 +3,9 @@
 namespace NN\Functions;
 
 
-class Sigmoid implements TransferFunction
+class Sigmoid extends AbstractTransferFunction
 {
-	public static $factor = 10;
+	public static $factor = 0.5;
 
 	public static function apply($output)
 	{
@@ -15,7 +15,7 @@ class Sigmoid implements TransferFunction
 	public static function derivative($output)
 	{
 		$asd = self::apply($output);
-		return $asd * $asd * self::$factor * pow(M_E, -self::$factor * $output);
+		return parent::derivative($asd * $asd * self::$factor * pow(M_E, -self::$factor * $output));
 	}
 
 }

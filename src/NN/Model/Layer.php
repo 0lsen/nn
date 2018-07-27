@@ -16,6 +16,8 @@ abstract class Layer {
 
 	public $input;
 
+	protected $hasBias;
+
 	protected $numberOfWeights;
 
 	public function __construct(LayerConfiguration $configuration)

@@ -31,10 +31,10 @@ class Helper
 		$hiddenConfig = [];
 		foreach ($hiddenLayers as $index => $layer) {
 			$numberOfInputs = $index == 0 ? $inDim : $hiddenLayers[$index-1]['neurons'];
-			$weights = $layer['weights'] ?? self::createWeights($numberOfInputs+1);
+			$weights = $layer['weights'] ?? self::createWeights($numberOfInputs);
 			$hiddenConfig[] = new LayerConfiguration($layer['neurons'], $layer['transfer'], $weights);
 		}
-		$outputConfig = new LayerConfiguration($outDim, $outTransfer, is_null($outWeights) ? self::createWeights(sizeof($hiddenLayers) ? end($hiddenLayers)['neurons']+1 : $inDim+1) : $outWeights);
+		$outputConfig = new LayerConfiguration($outDim, $outTransfer, is_null($outWeights) ? self::createWeights(sizeof($hiddenLayers) ? end($hiddenLayers)['neurons'] : $inDim) : $outWeights);
 
 		return new SimpleNetwork($inputConfig, $outputConfig, $hiddenConfig);
 	}
@@ -43,7 +43,7 @@ class Helper
 	{
 		$weights = [];
 		for ($i = 0; $i < $numberOfInputs; $i++) {
-			$weights[] = self::noise();
+			$weights[] = self::noise()+0.5*(rand(0,1) ? 1 : -1);
 		}
 		return $weights;
 	}

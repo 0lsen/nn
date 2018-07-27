@@ -3,7 +3,7 @@
 namespace NN\Functions;
 
 
-class Relu implements TransferFunction
+class Relu extends AbstractTransferFunction
 {
 	public static function apply($output)
 	{
@@ -12,6 +12,6 @@ class Relu implements TransferFunction
 
 	public static function derivative($output)
 	{
-		return (int) $output > 0;
+		return parent::derivative((int) $output > 0);
 	}
 }

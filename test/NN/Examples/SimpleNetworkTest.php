@@ -217,7 +217,7 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 		];
 
 		$trainingQualiData = file_get_contents('qualification.txt');
-		preg_match_all('/([A-Za-zäÄüÜöÖß\- ]+)\r\n\1{1}\r\n([A-Za-zäÄüÜöÖß\- ]+)\r\n\2{1}\r\n.*\r\n(\d)-(\d)/',$trainingQualiData, $matches);
+		preg_match_all('/([A-Za-zäÄüÜöÖß\- ]+)\n\1{1}\n([A-Za-zäÄüÜöÖß\- ]+)\n\2{1}\n.*\n(\d)-(\d)/',$trainingQualiData, $matches);
 		$resultsQuali = [];
 		foreach ($matches[0] as $index => $match) {
 			if (array_search($matches[1][$index], $participantsWc) || array_search($matches[2][$index], $participantsWc)) {
@@ -272,10 +272,8 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 			\NN\Model\Logger::$run = 0;
 		}
 
-		$result1 = $oracle->run($this->makeTestMatch("Frankreich", "Uruguay", $participants));
-		$result2 = $oracle->run($this->makeTestMatch("Belgien", "Brasilien", $participants));
-		$result3 = $oracle->run($this->makeTestMatch("England", "Schweden", $participants));
-		$result4 = $oracle->run($this->makeTestMatch("Kroatien", "Russland", $participants));
+		$result1 = $oracle->run($this->makeTestMatch("Frankreich", "Kroatien", $participants));
+		$result2 = $oracle->run($this->makeTestMatch("Belgien", "England", $participants));
 		$this->assertTrue(true);
 	}
 
@@ -300,5 +298,44 @@ class SimpleNetworkTest extends \PHPUnit\Framework\TestCase
 		$input[array_search($teams[0], $participants) + ($teams[0] > $teams[1] ? sizeof($participants) : 0)] = 1;
 		$input[array_search($teams[1], $participants) + ($teams[0] > $teams[1] ? 0 : sizeof($participants))] = 1;
 		return $input;
+	}
+
+	public function test_8_3_8_binaryMapping() {
+		$hiddenConfig = [
+			[
+				"neurons" => 3,
+				"transfer" => "Sigmoid"
+			],
+		];
+		$nn = Helper::buildSimpleNetwork(8, 8, 'Linear', $hiddenConfig);
+
+		$trainingData = [];
+		for ($i = 0; $i < 100000; $i++) {
+			$array = array_fill(0,8, 0);
+			$array[rand(0,7)] = 1;
+			$trainingData[] = new TrainingData($array, $array);
+		}
+
+		$nn->train($trainingData, 0.1);
+
+		$result1 = $nn->run([1,0,0,0,0,0,0,0]);
+		$result2 = $nn->run([0,1,0,0,0,0,0,0]);
+		$result3 = $nn->run([0,0,1,0,0,0,0,0]);
+		$result4 = $nn->run([0,0,0,1,0,0,0,0]);
+		$result5 = $nn->run([0,0,0,0,1,0,0,0]);
+		$result6 = $nn->run([0,0,0,0,0,1,0,0]);
+		$result7 = $nn->run([0,0,0,0,0,0,1,0]);
+		$result8 = $nn->run([0,0,0,0,0,0,0,1]);
+
+		$this->assertEquals(0, array_keys($result1, max($result1))[0]);
+		$this->assertEquals(1, array_keys($result2, max($result2))[0]);
+		$this->assertEquals(2, array_keys($result3, max($result3))[0]);
+		$this->assertEquals(3, array_keys($result4, max($result4))[0]);
+		$this->assertEquals(4, array_keys($result5, max($result5))[0]);
+		$this->assertEquals(5, array_keys($result6, max($result6))[0]);
+		$this->assertEquals(6, array_keys($result7, max($result7))[0]);
+		$this->assertEquals(7, array_keys($result8, max($result8))[0]);
+
+		$this->assertTrue(true);
 	}
 }

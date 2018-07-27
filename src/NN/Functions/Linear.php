@@ -3,7 +3,7 @@
 namespace NN\Functions;
 
 
-class Linear implements TransferFunction
+class Linear extends AbstractTransferFunction
 {
 	public static function apply($output)
 	{

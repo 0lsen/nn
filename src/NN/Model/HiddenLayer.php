@@ -9,7 +9,9 @@ class HiddenLayer extends Layer
 {
 	public function __construct(LayerConfiguration $configuration)
 	{
-		$this->neurons[] = new BiasNeuron();
+		if ($configuration->hasBias) {
+			$this->neurons[] = new BiasNeuron();
+		}
 		parent::__construct($configuration);
 	}
 
